@@ -22,27 +22,6 @@ namespace Buda_Paul_Lab2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Buda_Paul_Lab2.Models.Authors", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Authors");
-                });
-
             modelBuilder.Entity("Buda_Paul_Lab2.Models.Book", b =>
                 {
                     b.Property<int>("ID")
@@ -54,12 +33,6 @@ namespace Buda_Paul_Lab2.Migrations
                     b.Property<string>("Author")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("AuthorID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("AuthorsID")
-                        .HasColumnType("int");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(6, 2)");
@@ -75,8 +48,6 @@ namespace Buda_Paul_Lab2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("AuthorsID");
 
                     b.HasIndex("PublisherID");
 
@@ -102,22 +73,11 @@ namespace Buda_Paul_Lab2.Migrations
 
             modelBuilder.Entity("Buda_Paul_Lab2.Models.Book", b =>
                 {
-                    b.HasOne("Buda_Paul_Lab2.Models.Authors", "Authors")
-                        .WithMany("Books")
-                        .HasForeignKey("AuthorsID");
-
                     b.HasOne("Buda_Paul_Lab2.Models.Publisher", "Publisher")
                         .WithMany("Books")
                         .HasForeignKey("PublisherID");
 
-                    b.Navigation("Authors");
-
                     b.Navigation("Publisher");
-                });
-
-            modelBuilder.Entity("Buda_Paul_Lab2.Models.Authors", b =>
-                {
-                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("Buda_Paul_Lab2.Models.Publisher", b =>
