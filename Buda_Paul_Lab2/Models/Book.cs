@@ -20,5 +20,8 @@ namespace Buda_Paul_Lab2.Models
 
         public int? PublisherID { get; set; }
         public Publisher? Publisher { get; set; }
+
+        public int? AuthorID { get; set; }
+        public Authors? Authors { get; set; } //navigation property
     }
 }
