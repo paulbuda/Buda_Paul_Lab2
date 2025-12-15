@@ -1,0 +1,28 @@
+@page
+@model Buda_Paul_Lab2.Pages.ConfirmAllEmailsModel
+@{
+    ViewData["Title"] = "Confirm Emails";
+}
+
+<h1>Email Confirmation Tool</h1>
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">
+        @Model.Message
+    </div>
+}
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="EmailToConfirm" class="form-label">Email to confirm:</label>
+        <input asp-for="EmailToConfirm" class="form-control" placeholder="email@example.com" />
+    </div>
+    <button type="submit" class="btn btn-primary">Confirm Email</button>
+</form>
+
+<hr />
+
+<form method="post" asp-page-handler="ConfirmAll">
+    <button type="submit" class="btn btn-warning">Confirm ALL Emails (Development Only)</button>
+</form>

@@ -8,7 +8,7 @@ namespace Buda_Paul_Lab2.Models
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Adress { get; set; }
-        public string Email { get; set; }
+        public string? Email { get; set; }
         public string? Phone { get; set; }
         [Display(Name = "Full Name")]
         public string? FullName
