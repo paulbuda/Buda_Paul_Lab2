@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Buda_Paul_Lab2.Data;
 using Buda_Paul_Lab2.Models;
+using Buda_Paul_Lab2.ViewModels;
 
 namespace Buda_Paul_Lab2.Pages.Publishers
 {
@@ -20,10 +21,25 @@ namespace Buda_Paul_Lab2.Pages.Publishers
         }
 
         public IList<Publisher> Publisher { get;set; } = default!;
+        public PublisherIndexData PublisherData { get; set; }
+        public int PublisherID { get; set; }
+        public int BookID { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? id, int? bookID)
         {
-            Publisher = await _context.Publisher.ToListAsync();
+            PublisherData = new PublisherIndexData();
+            PublisherData.Publishers = await _context.Publisher
+                .Include(i => i.Books)
+                .ThenInclude(c => c.Author)
+                .OrderBy(i => i.PublisherName)
+                .ToListAsync();
+            if (id != null)
+            {
+                PublisherID = id.Value;
+                Publisher publisher = PublisherData.Publishers
+                    .Where(i => i.ID == id.Value).Single();
+                PublisherData.Books = publisher.Books;
+            }
         }
     }
 }
