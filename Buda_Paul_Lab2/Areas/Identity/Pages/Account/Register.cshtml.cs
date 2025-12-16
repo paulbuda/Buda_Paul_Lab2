@@ -137,6 +137,8 @@ namespace Buda_Paul_Lab2.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    var role = await _userManager.AddToRoleAsync(user, "User");
+
                     Member.Email = Input.Email;
                     _context.Member.Add(Member);
                     await _context.SaveChangesAsync();
