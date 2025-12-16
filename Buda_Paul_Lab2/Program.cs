@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages(options =>
 {
     options.Conventions.AuthorizeFolder("/Books");
+    options.Conventions.AllowAnonymousToPage("/Books/Index");
+    options.Conventions.AllowAnonymousToPage("/Books/Details");
 });
 builder.Services.AddDbContext<Buda_Paul_Lab2Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Buda_Paul_Lab2Context") ?? throw new InvalidOperationException("Connection string 'Buda_Paul_Lab2Context' not found.")));
