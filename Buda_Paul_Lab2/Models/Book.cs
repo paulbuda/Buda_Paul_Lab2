@@ -8,6 +8,8 @@ namespace Buda_Paul_Lab2.Models
     {
         public int ID { get; set; }
 
+        [Required(ErrorMessage = "Titlul este obligatoriu")]
+        [StringLength(150, MinimumLength = 3, ErrorMessage = "Titlul trebuie sa contina intre 3 si 150 de caractere")]
         [Display(Name = "Book Title")]
         public string Title { get; set; }
 
